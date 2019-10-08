@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="stationery">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Dropwizard</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body ng-controller="StationeryController">
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <h1 class="text-center font-weight-bold">Stationery Store</h1>
+</div>
+
+<div class="container-fluid" >
+    <form ng-submit="createStationeryProduct(stationeryForm.stationery)">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputBarcode">Barcode</label>
+                <input type="text" class="form-control" placeholder="Barcode" id="inputBarcode" ng-model="stationeryForm.barcode"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputName">Name</label>
+                <input type="text" class="form-control" placeholder="Name" id="inputName" ng-model="stationeryForm.name"/>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputQuantity">Quantity</label>
+                <input type="number" class="form-control" placeholder="Quantity" id="inputQuantity" ng-model="stationeryForm.quantity"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputCategory">Category</label>
+                <input type="text" class="form-control" placeholder="Category" id="inputCategory" ng-model="stationeryForm.category"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputDescription">Description</label>
+            <textarea class="form-control" id="inputDescription" rows="3" ng-model="stationeryForm.description"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" value="Submit">Save</button>
+        <button type="button" class="btn btn-secondary" ng-click="clearFormFields()">Clear</button>
+    </form>
+
+    <br/><br/>
+    <div class="table-responsive text-nowrap">
+    <table class="table table-hover">
+        <thead class=".thead-dark">
+        <tr>
+            <th scope="col">Barcode</th>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Category</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="stationeryList in stationeries | orderBy:'name' | filter:searchText">
+                <td>{{ stationeryList.barcode }}</td>
+                <td>{{ stationeryList.name }}</td>
+                <td>{{ stationeryList.quantity }}</td>
+                <td>{{ stationeryList.category }}</td>
+                <td>{{ stationeryList.description }}</td>
+                <td style="width: 100px">
+                    <button class="btn" ng-click="editStationeryProduct(stationeryList)"><i class="material-icons">edit</i></button>
+                    <button class="btn" ng-click="deleteStationeryProduct(stationeryList)"><i class="material-icons">delete</i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="js/libs/angular/angular.min.js"></script>
+<script type="text/javascript" src="js/libs/angular/angular-route.min.js"></script>
+<script type="text/javascript" src="js/libs/angular/angular-resource.min.js"></script>
+
+<script type="text/javascript" src="js/stationery.js"></script>
+<script type="text/javascript" src="js/controller/stationeryController.js"></script>
+<script type="text/javascript" src="js/service/stationeryService.js"></script>
+
+<script type="text/javascript" src="js/libs/jquery-3.4.1.slim.js"></script>
+<script type="text/javascript" src="js/libs/popper.min.js"></script>
+<script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+
+</body>
+</html>
